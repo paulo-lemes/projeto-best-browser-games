@@ -1,0 +1,26 @@
+option {
+  background-color: black;
+  color: white;
+}
+
+.inputEditGame {
+  width: 800px;
+}
+
+.inputDescription {
+  height: 115px;
+}
+
+.errorNewGame {
+  margin-bottom: -50px;
+}
+
+.divBtnsEditGame {
+  display: flex;
+  justify-content: center;
+  margin: 90px 0 100px 0;
+}
+
+.btnEditGame {
+  margin-right: 15px;
+}
