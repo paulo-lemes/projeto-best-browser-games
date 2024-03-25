@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import CardGame from "../../components/CardGame";
 import Button from "../../components/Button";
 import { useGames } from "../../contexts/GamesContext";
+import Loading from "../../components/Loading";
 
 const GamesCategory = () => {
   const { categoryId, categoryName } = useParams();
@@ -15,7 +16,7 @@ const GamesCategory = () => {
   return (
     <>
       {loading ? (
-        <h3 className="loading">Loading...</h3>
+        <Loading />
       ) : (
         <div className="divFlexCenter">
           <h2 className="title2">

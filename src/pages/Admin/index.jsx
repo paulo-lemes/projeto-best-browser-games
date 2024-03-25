@@ -1,18 +1,19 @@
 import AddGame from "../../components/AddGame";
 import DeleteGame from "../../components/DeleteGame";
 import CategoriesAdmin from "../../components/CategoriesAdmin";
-import RestrictedRouteAdmin from "../../contexts/RestrictedRouteAdmin";
+import RestrictedRoute from "../../contexts/RestrictedRoute";
 import { useAuth } from "../../contexts/AuthContext";
+import Loading from "../../components/Loading";
 
 const Admin = () => {
-  const { loading } = useAuth();
+  const { loadingUser } = useAuth();
 
   return (
     <>
-      {loading ? (
-        <h3 className="loading">Loading...</h3>
+      {loadingUser ? (
+        <Loading/>
       ) : (
-        <RestrictedRouteAdmin>
+        <RestrictedRoute page="admin">
           <div className="divFlexCenter divAccessAdmin">
             <h2 className="title2">
               GERENCIAMENTO DE{" "}
@@ -26,7 +27,7 @@ const Admin = () => {
           <CategoriesAdmin />
           <AddGame />
           <DeleteGame />
-        </RestrictedRouteAdmin>
+        </RestrictedRoute>
       )}
     </>
   );

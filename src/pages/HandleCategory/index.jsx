@@ -1,17 +1,19 @@
 import { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import style from "./style.module.css";
 import { useAuth } from "../../contexts/AuthContext";
-import RestrictedRouteAdmin from "../../contexts/RestrictedRouteAdmin";
+import RestrictedRoute from "../../contexts/RestrictedRoute";
+import Loading from "../../components/Loading";
+import ErrorFetch from "../../components/ErrorFetch";
 
 const HandleCategory = () => {
   const navigate = useNavigate();
 
-  const { loading } = useAuth();
+  const { loadingUser } = useAuth();
   const { categoryId, categoryName } = useParams();
-  const [alertError, setAlert] = useState("");
+  const [error, setError] = useState([]);
 
   const [nameCategory, setNameCategory] = useState({
     name: categoryName,
@@ -40,7 +42,7 @@ const HandleCategory = () => {
       if (response.status === 200) {
         navigate("/accessAdmin");
       } else {
-        setAlert(response.message);
+        setError(response.message);
       }
     });
   };
@@ -69,10 +71,10 @@ const HandleCategory = () => {
 
   return (
     <>
-      {loading ? (
-        <h3 className="loading">Loading...</h3>
+      {loadingUser ? (
+        <Loading />
       ) : (
-        <RestrictedRouteAdmin>
+        <RestrictedRoute page="admin">
           <div className={`divFlexCenter ${style.divHandleCategory}`}>
             <h1 className="title3">Modifique o nome ou exclua a categoria</h1>
             <form className="">
@@ -84,7 +86,7 @@ const HandleCategory = () => {
                 handleEvent={handleInputChange}
               />
             </form>
-            <p className="errorDescription">{alertError}</p>
+            <ErrorFetch error={error} />
             <div className={style.divBtnsHandleCategory}>
               <Button
                 text="Alterar"
@@ -98,7 +100,7 @@ const HandleCategory = () => {
               />
             </div>
           </div>
-        </RestrictedRouteAdmin>
+        </RestrictedRoute>
       )}
     </>
   );

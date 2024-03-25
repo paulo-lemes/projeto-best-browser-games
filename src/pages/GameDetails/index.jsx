@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import CardGameDetails from "../../components/CardGameDetails";
 import { useGames } from "../../contexts/GamesContext";
 import GameRatings from "../../components/GameRatings";
+import Loading from "../../components/Loading";
 
 const GameDetails = () => {
   const { gameId } = useParams();
@@ -17,7 +18,7 @@ const GameDetails = () => {
   return (
     <>
       {loading ? (
-        <h3 className="title3 loading">Loading...</h3>
+        <Loading />
       ) : gameDetails.length ? (
         <>
           <CardGameDetails game={gameDetails[0]} />

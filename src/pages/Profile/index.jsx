@@ -2,20 +2,21 @@ import style from "./style.module.css";
 import Button from "../../components/Button";
 import BorderTopGradient from "../../components/BorderTopGradient";
 import RecommendedGames from "../../components/RecommendedGames";
-import RestrictedRouteProfile from "../../contexts/RestrictedRouteProfile";
+import RestrictedRoute from "../../contexts/RestrictedRoute";
 import { useAuth } from "../../contexts/AuthContext";
 import { Link } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 const Profile = () => {
-  const { user, loading } = useAuth();
+  const { user, loadingUser, handleLogout } = useAuth();
 
   return (
     <>
       <BorderTopGradient />
-      {loading ? (
-        <h3 className="loading">Loading...</h3>
+      {loadingUser ? (
+        <Loading />
       ) : (
-        <RestrictedRouteProfile>
+        <RestrictedRoute page="profile">
           {user && (
             <div className="divFlexCenter">
               <h2 className={`title2 ${style.titleUserInfo}`}>
@@ -36,16 +37,19 @@ const Profile = () => {
                 </p>
                 <p className="description">Estado: {user.state}</p>
               </div>
+              <div className={style.divBtnsProfile}>
               <Link to="/profileEdit" onClick={() => window.scroll(0, 0)}>
                 <Button
                   text="Alterar cadastro"
                   classCSS={`btnGradient ${style.btnCallEditPage}`}
                 />
               </Link>
+              <Button text="Sair do perfil" classCSS="btnBorderGradient" handleEvent={handleLogout}/>
+              </div>
               <RecommendedGames />
             </div>
           )}
-        </RestrictedRouteProfile>
+        </RestrictedRoute>
       )}
     </>
   );

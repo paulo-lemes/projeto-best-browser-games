@@ -3,6 +3,7 @@ import style from "./style.module.css";
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
 import { useGames } from "../../contexts/GamesContext";
+import Loading from "../../components/Loading";
 
 const Categories = () => {
   const { categories, loadingCategories } = useGames();
@@ -10,7 +11,7 @@ const Categories = () => {
   return (
     <>
       {loadingCategories ? (
-        <h3 className="loading">Loading...</h3>
+        <Loading/>
       ) : (
         <div className="divFlexCenter">
           <h2 className="title2 titleGradient">CATEGORIAS</h2>

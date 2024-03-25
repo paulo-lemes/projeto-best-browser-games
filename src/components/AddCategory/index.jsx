@@ -3,9 +3,10 @@ import style from "./style.module.css";
 import DivGradient from "../DivGradient";
 import Button from "../Button";
 import Input from "../Input";
+import ErrorFetch from "../ErrorFetch";
 
 const AddCategory = () => {
-  const [alertError, setAlert] = useState([]);
+  const [error, setError] = useState([]);
   const [nameCategory, setNameCategory] = useState({
     name: "",
   });
@@ -30,7 +31,7 @@ const AddCategory = () => {
       if (response.status === 201) {
         window.location.reload();
       } else {
-        setAlert(resposta);
+        setError(resposta);
       }
     });
   };
@@ -54,10 +55,7 @@ const AddCategory = () => {
             classCSS={`btnGradient ${style.insert}`}
           />
         </form>
-        <span className="errorDescription">
-          {alertError.length > 0 &&
-            alertError.map((item) => <p key={item.message}>{item.message}</p>)}
-        </span>
+        <ErrorFetch error={error} />
         <DivGradient classCSS={style.divGradientAddCategory} />
       </div>
     </>

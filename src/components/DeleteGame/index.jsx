@@ -3,11 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import style from "./style.module.css";
 import Button from "../Button";
 import { useGames } from "../../contexts/GamesContext";
-// import AlertError from "../AlertError";
+import ErrorFetch from "../ErrorFetch";
 
 const DeleteGame = () => {
   const navigate = useNavigate();
-  const [alertError, setAlert] = useState([]);
+  const [error, setError] = useState([]);
   const [gameId, setGameId] = useState("");
 
   const { games } = useGames();
@@ -31,7 +31,7 @@ const DeleteGame = () => {
       if (response.status === 200) {
         navigate("/games");
       } else {
-        setAlert(resposta);
+        setError(resposta);
       }
     });
   };
@@ -58,12 +58,12 @@ const DeleteGame = () => {
               ))}
             </select>
           </form>
-          {/* <AlertError alertError={alertError} classCSS="errorNewGame" /> */}
+          <ErrorFetch error={error} />
           <Link to={`/editGame/${gameId}`}>
-          <Button
-            text="Editar"
-            classCSS={`btnGradient ${style.btnDeleteGame}`}
-          />
+            <Button
+              text="Editar"
+              classCSS={`btnGradient ${style.btnDeleteGame}`}
+            />
           </Link>
           <Button
             text="Excluir"
@@ -74,6 +74,6 @@ const DeleteGame = () => {
       </div>
     </>
   );
-}
+};
 
-export default DeleteGame
+export default DeleteGame;

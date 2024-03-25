@@ -2,6 +2,7 @@ import SearchGames from "../../components/SearchGames";
 import { useGames } from "../../contexts/GamesContext";
 import { Link } from "react-router-dom";
 import CardGame from "../../components/CardGame";
+import Loading from "../../components/Loading";
 import { useEffect } from "react";
 
 const Games = () => {
@@ -14,7 +15,7 @@ const Games = () => {
   return (
     <>
       {loading ? (
-        <h2 className="loading">Loading...</h2>
+        <Loading />
       ) : (
         <>
           <SearchGames />

@@ -4,6 +4,7 @@ import AddCategory from "../AddCategory";
 import Button from "../Button";
 import { useAuth } from "../../contexts/AuthContext";
 import { useGames } from "../../contexts/GamesContext";
+import Loading from "../Loading";
 
 const CategoriesAdmin = () => {
   const { user } = useAuth();
@@ -13,7 +14,7 @@ const CategoriesAdmin = () => {
   return (
     <>
       {loadingCategories ? (
-        <h3 className="loading">Loading...</h3>
+        <Loading/>
       ) : (
         <div className="divFlexCenter">
           <h2 className="title2 titleGradient">CATEGORIAS</h2>

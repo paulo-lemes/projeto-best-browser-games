@@ -4,14 +4,14 @@ import Input from "../Input";
 import Button from "../Button";
 import Star from "../../assets/CardGameDetails/Star.svg";
 import StarTransparent from "../../assets/CardGameDetails/StarTransparent.svg";
-// import AlertError from "../AlertError";
+import ErrorFetch from "../ErrorFetch";
 import style from "./style.module.css";
 import { useAuth } from "../../contexts/AuthContext";
 
 const CardGameDetails = ({game}) => {
   const {user} = useAuth();
 
-  const [alertError, setAlert] = useState("");
+  const [error, setError] = useState([]);
   const [ratingId, setRatingId] = useState();
   const [rateGame, setRateGame] = useState({
     score: 1,
@@ -54,7 +54,7 @@ const CardGameDetails = ({game}) => {
       if (response.status === 201) {
         window.location.reload();
       } else {
-        setAlert(resposta);
+        setError(resposta);
       }
     });
   };
@@ -152,10 +152,7 @@ const CardGameDetails = ({game}) => {
                 handleEvent={handleInputChange}
               />
               <div className="divFlexCenter">
-                {/* <AlertError
-                  alertError={alertError}
-                  classCSS={style.errorDescription}
-                /> */}
+                <ErrorFetch error={error} />
                 {ratingId ? (
                   <Button
                     text="Alterar avaliação"

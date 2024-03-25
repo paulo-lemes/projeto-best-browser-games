@@ -5,13 +5,11 @@ import Router from "./routes";
 
 function App() {
   return (
-    <>
-      <GamesProvider>
-        <AuthProvider>
-          <Router />
-        </AuthProvider>
-      </GamesProvider>
-    </>
+    <GamesProvider>
+      <AuthProvider>
+        <Router />
+      </AuthProvider>
+    </GamesProvider>
   );
 }
 

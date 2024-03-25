@@ -8,12 +8,10 @@ export const useGames = () => useContext(GamesContext);
 export const GamesProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [loadingCategories, setLoadingCategories] = useState(true);
-  const [loadingRecommendedGames, setLoadingRecommendedGames] = useState(true);
   const [searchText, setSearchText] = useState("");
   const [searchCategory, setSearchCategory] = useState("");
   const [gamesUnfiltered, setGamesUnfiltered] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [recommendedGames, setRecommendedGames] = useState([]);
 
   useEffect(() => {
     fetchGames();
@@ -74,37 +72,17 @@ export const GamesProvider = ({ children }) => {
     setLoadingCategories(false);
   };
 
-  const getRecommendedGames = async (userId) => {
-    try {
-      const { data } = await fetchApi(`/users/${userId}/recommendations`, {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      console.log(data);
-      setRecommendedGames(data);
-    } catch (err) {
-      console.log(err.response.data);
-    }
-    setLoadingRecommendedGames(false);
-  };
-
   return (
     <GamesContext.Provider
       value={{
         games,
         categories,
-        recommendedGames,
         loading,
         loadingCategories,
-        loadingRecommendedGames,
         handleInputText,
         handleInputSelect,
         handleSearchGames,
         handleSearchCategory,
-        getRecommendedGames,
       }}
     >
       {children}

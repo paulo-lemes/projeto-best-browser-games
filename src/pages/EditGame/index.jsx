@@ -4,14 +4,17 @@ import Input from "../../components/Input";
 import style from "./style.module.css";
 import { useAuth } from "../../contexts/AuthContext";
 import { Link, useParams } from "react-router-dom";
-import RestrictedRouteAdmin from "../../contexts/RestrictedRouteAdmin";
+import RestrictedRoute from "../../contexts/RestrictedRoute";
 import { useGames } from "../../contexts/GamesContext";
+import Loading from "../../components/Loading";
+import ErrorFetch from "../ErrorFetch";
 
 const EditGame = () => {
   const formData = useRef(null);
   const { gameId } = useParams();
-  const { loading } = useAuth();
-  const { games, categories } = useGames();
+  const { loadingUser } = useAuth();
+  const { games, categories } = useGames();  
+  const [error, setError] = useState([]);
   const [gameDetails, setGameDetails] = useState({
     name: "",
     category: {
@@ -57,10 +60,10 @@ const EditGame = () => {
 
   return (
     <>
-      {loading ? (
-        <h3 className="loading">Loading...</h3>
+      {loadingUser ? (
+        <Loading/>
       ) : (
-        <RestrictedRouteAdmin>
+        <RestrictedRoute page="admin">
           <div className={`divFlexCenter ${style.divEditUser}`}>
             <h2 className="title3">Altere as informações do game</h2>
             <form ref={formData} onSubmit={handleForm}>
@@ -112,12 +115,7 @@ const EditGame = () => {
                 placeholder={gameDetails.videoURL}
                 classCSS={style.inputEditGame}
               />
-              {/* <span className={`errorDescription ${style.errorUserEdit}`}>
-                {alertError.length > 0 &&
-                  alertError.map((item) => (
-                    <p key={item.message}>{item.message}</p>
-                  ))}
-              </span> */}
+              <ErrorFetch error={error} />
               <div className={style.divBtnsEditGame}>
                 <button
                   type="submit"
@@ -131,7 +129,7 @@ const EditGame = () => {
               </div>
             </form>
           </div>
-        </RestrictedRouteAdmin>
+        </RestrictedRoute>
       )}
     </>
   );

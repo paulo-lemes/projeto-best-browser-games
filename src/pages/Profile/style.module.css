@@ -21,8 +21,12 @@
   font-size: 40px;
 }
 
-.btnCallEditPage {
+.divBtnsProfile {
   margin: 40px 0 80px 0;
+}
+
+.btnCallEditPage {
+  margin-right: 20px;
 }
 
 .titleRatedGames {

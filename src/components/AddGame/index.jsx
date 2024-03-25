@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import style from "./style.module.css";
 import Input from "../Input";
 import Button from "../Button";
-// import AlertError from "../AlertError";
+import ErrorFetch from "../ErrorFetch";
 import { useGames } from "../../contexts/GamesContext";
 
 const AddGame = () => {
   const navigate = useNavigate();
-  const [alertError, setAlert] = useState([]);
+  const [error, setError] = useState([]);
   const [newGame, setNewGame] = useState({
     name: "",
     category: {
@@ -47,7 +47,7 @@ const AddGame = () => {
       if (response.status === 201) {
         navigate("/games");
       } else {
-        setAlert(resposta);
+        setError(resposta);
       }
     });
   };
@@ -117,7 +117,7 @@ const AddGame = () => {
             classCSS={style.inputNewGame}
           />
         </form>
-        {/* <AlertError alertError={alertError} classCSS="errorNewGame"/> */}
+        <ErrorFetch error={error} />
         <Button
           text="Cadastrar"
           classCSS={`btnGradient ${style.insertNewGame}`}
