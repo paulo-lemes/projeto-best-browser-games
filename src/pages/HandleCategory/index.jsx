@@ -7,13 +7,15 @@ import { useAuth } from "../../contexts/AuthContext";
 import RestrictedRoute from "../../contexts/RestrictedRoute";
 import Loading from "../../components/Loading";
 import ErrorFetch from "../../components/ErrorFetch";
+import fetchApi from "../../hooks/api";
+import { useGames } from "../../contexts/GamesContext";
 
 const HandleCategory = () => {
-  const navigate = useNavigate();
-
   const { loadingUser } = useAuth();
   const { categoryId, categoryName } = useParams();
+  const { showDialog, fetchGamesCategories } = useGames();
   const [error, setError] = useState([]);
+  const navigate = useNavigate();
 
   const [nameCategory, setNameCategory] = useState({
     name: categoryName,
@@ -24,49 +26,25 @@ const HandleCategory = () => {
     setNameCategory({ ...nameCategory, [name]: value });
   };
 
-  const handleEdit = () => {
-    fetch(
-      `https://api-best-browser-games.vercel.app/categories/${categoryId}`,
-      {
-        method: "PUT",
+  const handleAction = async (method, action) => {
+    try {
+      const { data } = await fetchApi(`/categories/${categoryId}`, {
+        method: method,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify(nameCategory),
-      }
-    ).then(async (response) => {
-      console.log(response.status);
-      const resposta = await response.json();
-      console.log(resposta);
-      if (response.status === 200) {
-        navigate("/accessAdmin");
-      } else {
-        setError(response.message);
-      }
-    });
-  };
-
-  const handleDelete = () => {
-    fetch(
-      `https://api-best-browser-games.vercel.app/categories/${categoryId}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    ).then(async (response) => {
-      console.log(response.status);
-      const resposta = await response.json();
-      console.log(resposta);
-      if (response.status === 200) {
-        navigate("/accessAdmin");
-      } else {
-        setAlert(response.message);
-      }
-    });
+        data: JSON.stringify(nameCategory),
+      });
+      console.log(data);
+      showDialog(`Categoria ${action} com sucesso!`);
+      fetchGamesCategories();
+      window.scroll(0, 0);
+      navigate("/admin");
+    } catch (err) {
+      console.log(err.response.data);
+      setError(err.response.data);
+    }
   };
 
   return (
@@ -85,20 +63,20 @@ const HandleCategory = () => {
                 value={nameCategory.name}
                 handleEvent={handleInputChange}
               />
+              <ErrorFetch error={error} />
+              <div className={style.divBtnsHandleCategory}>
+                <Button
+                  text="Alterar"
+                  classCSS={`btnGradient ${style.btnHandleCategory}`}
+                  handleEvent={() => handleAction("put", "alterada")}
+                />
+                <Button
+                  text="Excluir"
+                  classCSS="btnBorderGradient"
+                  handleEvent={() => handleAction("delete", "excluída")}
+                />
+              </div>
             </form>
-            <ErrorFetch error={error} />
-            <div className={style.divBtnsHandleCategory}>
-              <Button
-                text="Alterar"
-                classCSS={`btnGradient ${style.btnHandleCategory}`}
-                handleEvent={handleEdit}
-              />
-              <Button
-                text="Excluir"
-                classCSS="btnBorderGradient"
-                handleEvent={handleDelete}
-              />
-            </div>
           </div>
         </RestrictedRoute>
       )}

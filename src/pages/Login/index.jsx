@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import style from "./style.module.css";
@@ -13,7 +13,7 @@ import fetchApi from "../../hooks/api";
 const Login = () => {
   const formData = useRef(null);
   const [error, setError] = useState([]);
-  const { user, loadingUser, handleLogin } = useAuth();
+  const { user, loadingUser, handleLogin, showDialog } = useAuth();
 
   const postLogin = async (infos) => {
     try {
@@ -26,7 +26,6 @@ const Login = () => {
       });
       console.log(data);
       handleLogin(data.token);
-      // showDialog("Login realizado com sucesso!");
     } catch (err) {
       console.log(err.response.data);
       setError([{message: "Usuário e/ou senha inválido(s)."}]);
@@ -47,6 +46,10 @@ const Login = () => {
 
     postLogin(infos);
   };
+
+  useEffect(()=>{
+    if (user) showDialog("Login realizado com sucesso!");
+  }, [user])
 
   return (
     <>

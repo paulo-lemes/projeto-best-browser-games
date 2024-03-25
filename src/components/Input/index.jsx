@@ -1,17 +1,15 @@
 import "../../App.css";
 
-const Input = (props) => {
-  const {
-    type,
-    name,
-    value,
-    handleEvent,
-    label,
-    classCSS,
-    placeholder,
-    textarea,
-  } = props;
-
+const Input = ({
+  type,
+  name,
+  value,
+  handleEvent,
+  label,
+  classCSS,
+  placeholder,
+  textarea,
+}) => {
   return (
     <>
       {label && (

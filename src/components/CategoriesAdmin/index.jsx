@@ -9,7 +9,6 @@ import Loading from "../Loading";
 const CategoriesAdmin = () => {
   const { user } = useAuth();
   const { categories, loadingCategories } = useGames();
-  const isAdmin = user.roles === "admin";
 
   return (
     <>

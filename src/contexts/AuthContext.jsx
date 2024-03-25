@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
-    showDialog("Logout realizado");
+    showDialog("Logout realizado com sucesso");
   };
 
   useEffect(() => {
@@ -63,6 +63,7 @@ export const AuthProvider = ({ children }) => {
         handleLogin,
         handleLogout,
         getUserApi,
+        showDialog
       }}
     >
       {children}

@@ -8,8 +8,8 @@ import ErrorFetch from "../ErrorFetch";
 import style from "./style.module.css";
 import { useAuth } from "../../contexts/AuthContext";
 
-const CardGameDetails = ({game}) => {
-  const {user} = useAuth();
+const CardGameDetails = ({ game }) => {
+  const { user } = useAuth();
 
   const [error, setError] = useState([]);
   const [ratingId, setRatingId] = useState();
@@ -17,7 +17,7 @@ const CardGameDetails = ({game}) => {
     score: 1,
     description: "",
     game: game._id,
-    user: user && (user._id),
+    user: user && user._id,
   });
 
   useEffect(() => {
@@ -36,7 +36,6 @@ const CardGameDetails = ({game}) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setRateGame({ ...rateGame, [name]: value });
-    console.log(rateGame);
   };
 
   const handleSendRating = () => {
@@ -98,7 +97,7 @@ const CardGameDetails = ({game}) => {
             </div>
           </div>
           <p className={`title3 ${style.gameCategoryName}`}>
-            {game.category && game.category.name}
+            {game.category.name && game.category.name}
           </p>
           <p className={`description ${style.gameDescription}`}>
             {game.description && game.description}
@@ -175,10 +174,13 @@ const CardGameDetails = ({game}) => {
                   Faça login ou cadastre-se para avaliar o jogo!
                 </h4>
                 <div className="">
-                  <Link to="/login">
-                    <Button text="Login" classCSS={`btnGradient ${style.btnsAskLogin}`} />
+                  <Link to="/login" onClick={() => window.scroll(0, 0)}>
+                    <Button
+                      text="Login"
+                      classCSS={`btnGradient ${style.btnsAskLogin}`}
+                    />
                   </Link>
-                  <Link to="/register">
+                  <Link to="/register" onClick={() => window.scroll(0, 0)}>
                     <Button
                       text="Cadastro"
                       classCSS={`btnBorderGradient ${style.btnsAskLogin}`}
@@ -205,6 +207,6 @@ const CardGameDetails = ({game}) => {
       </div>
     </>
   );
-}
+};
 
-export default CardGameDetails
+export default CardGameDetails;

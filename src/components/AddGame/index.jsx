@@ -1,55 +1,62 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "./style.module.css";
 import Input from "../Input";
 import Button from "../Button";
 import ErrorFetch from "../ErrorFetch";
 import { useGames } from "../../contexts/GamesContext";
+import fetchApi from "../../hooks/api";
 
 const AddGame = () => {
-  const navigate = useNavigate();
+  const formData = useRef(null);
   const [error, setError] = useState([]);
-  const [newGame, setNewGame] = useState({
-    name: "",
-    category: {
-      _id: "",
-    },
-    description: "",
-    url: "",
-    imageURL: "",
-    videoURL: "",
-  });
+  const { categories, showDialog, fetchGames } = useGames()
+  const navigate = useNavigate();
 
-  const {categories} = useGames()
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewGame({ ...newGame, [name]: value });
+  const postGame = async (infos) => {
+    try {
+      const { data } = await fetchApi("/games", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        data: JSON.stringify(infos),
+      });
+      console.log(data);
+      showDialog("Game cadastrado com sucesso!")
+      fetchGames()
+      window.scroll(0, 0);
+      navigate("/games");
+    } catch (err) {
+      console.log(err.response.data);
+      setError(err.response.data);
+    }
   };
 
-  const handleSelectChange = (e) => {
-    const { value } = e.target;
-    setNewGame({ ...newGame, category: { _id: value } });
-  };
+  const handleForm = (event) => {
+    event.preventDefault();
 
-  const handleSave = () => {
-    fetch(`https://api-best-browser-games.vercel.app/games`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+    const formInfos = new FormData(formData.current);
+    const name = formInfos.get("name");
+    const category = formInfos.get("category");
+    const description = formInfos.get("description");
+    const url = formInfos.get("url");
+    const imageURL = formInfos.get("imageURL");
+    const videoURL = formInfos.get("videoURL");
+
+    const infos = {
+      name: name,
+      category: {
+        _id: category,
       },
-      body: JSON.stringify(newGame),
-    }).then(async (response) => {
-      console.log(response.status);
-      const resposta = await response.json();
-      console.log(resposta);
-      if (response.status === 201) {
-        navigate("/games");
-      } else {
-        setError(resposta);
-      }
-    });
+      description: description,
+      url: url,
+      imageURL: imageURL,
+      videoURL: videoURL,
+    };
+
+    postGame(infos);
   };
 
   return (
@@ -58,21 +65,16 @@ const AddGame = () => {
         <h2 className="title2">
           CADASTRO DE <span className="titleGradient">GAME</span>
         </h2>
-        <form >
+        <form ref={formData} onSubmit={handleForm}>
           <Input
             label="Título do game:"
             type="text"
             name="name"
-            value={newGame.name}
-            handleEvent={handleInputChange}
             classCSS={style.inputNewGame}
           />
-          <label htmlFor="categories">
-            Categoria:
-          </label>
+          <label htmlFor="category">Categoria:</label>
           <select
-            name="categories"
-            onChange={handleSelectChange}
+            name="category"
             className={`inputBorderGradient ${style.inputNewGame}`}
             required
           >
@@ -87,8 +89,6 @@ const AddGame = () => {
             label="Descrição:"
             textarea="true"
             name="description"
-            value={newGame.description}
-            handleEvent={handleInputChange}
             classCSS={`${style.inputNewGame} ${style.inputDescription}`}
             placeholder="A descrição do jogo deve conter entre 3 e 255 caracteres."
           />
@@ -96,36 +96,30 @@ const AddGame = () => {
             label="Endereço URL do site do jogo:"
             type="text"
             name="url"
-            value={newGame.url}
-            handleEvent={handleInputChange}
             classCSS={style.inputNewGame}
           />
           <Input
             label="Endereço URL da imagem oficial do jogo:"
             type="text"
             name="imageURL"
-            value={newGame.imageURL}
-            handleEvent={handleInputChange}
             classCSS={style.inputNewGame}
           />
           <Input
             label="Endereço URL de um video do jogo (opcional):"
             type="text"
             name="videoURL"
-            value={newGame.videoURL}
-            handleEvent={handleInputChange}
             classCSS={style.inputNewGame}
           />
+          <ErrorFetch error={error} />
+          <Button
+            text="Cadastrar"
+            type="submit"
+            classCSS={`btnGradient ${style.insertNewGame}`}
+          />
         </form>
-        <ErrorFetch error={error} />
-        <Button
-          text="Cadastrar"
-          classCSS={`btnGradient ${style.insertNewGame}`}
-          handleEvent={handleSave}
-        />
       </div>
     </>
   );
-}
+};
 
-export default AddGame
+export default AddGame;

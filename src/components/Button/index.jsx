@@ -1,13 +1,11 @@
-import "../../App.css"
+import "../../App.css";
 
-const Button = (props) => {
-  const { text, classCSS, handleEvent } = props;
-
+const Button = ({ text, classCSS, handleEvent, type = "button" }) => {
   return (
-    <button type="button" className={classCSS} onClick={handleEvent}>
+    <button type={type} className={classCSS} onClick={handleEvent}>
       {text}
     </button>
   );
-}
+};
 
-export default Button
+export default Button;

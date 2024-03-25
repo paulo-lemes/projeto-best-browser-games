@@ -12,6 +12,7 @@ option {
 }
 
 button.insertNewGame {
+  margin: auto;
   margin-top: 100px;
   margin-bottom: 130px;
 }

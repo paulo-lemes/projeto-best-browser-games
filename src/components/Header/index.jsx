@@ -44,9 +44,7 @@ const Header = () => {
               </div>
             )}
             {user && (
-              <Link to="/">
                 <Button text="Sair" handleEvent={handleLogout} />
-              </Link>
             )}
           </div>
         </div>

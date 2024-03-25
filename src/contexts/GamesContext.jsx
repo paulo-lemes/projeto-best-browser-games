@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useState, useMemo } from "react";
 import fetchApi from "../hooks/api";
+import Dialog from "../components/Dialog";
+import useDialog from "../hooks/useDialog";
 
 const GamesContext = createContext();
 
@@ -12,6 +14,17 @@ export const GamesProvider = ({ children }) => {
   const [searchCategory, setSearchCategory] = useState("");
   const [gamesUnfiltered, setGamesUnfiltered] = useState([]);
   const [categories, setCategories] = useState([]);
+
+  const {
+    dialogIsOpen,
+    textDialog,
+    confirm,
+    handleClick,
+    closeDialog,
+    showDialog,
+    setConfirm,
+    setHandleClick,
+  } = useDialog();
 
   useEffect(() => {
     fetchGames();
@@ -83,9 +96,22 @@ export const GamesProvider = ({ children }) => {
         handleInputSelect,
         handleSearchGames,
         handleSearchCategory,
+        fetchGames,
+        fetchGamesCategories,
+        showDialog,
+        setConfirm,
+        setHandleClick,
       }}
     >
       {children}
+      {dialogIsOpen && (
+        <Dialog
+          closeDialog={closeDialog}
+          textDialog={textDialog}
+          confirm={confirm}
+          handleClick={handleClick}
+        />
+      )}
     </GamesContext.Provider>
   );
 };

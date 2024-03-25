@@ -3,32 +3,36 @@ import DivGradient from "../DivGradient";
 import Star from "../../assets/CardGameDetails/Star.svg";
 import style from "./style.module.css";
 import { useAuth } from "../../contexts/AuthContext";
+import Loading from "../Loading";
 
 const GameRatings = ({ game }) => {
-  const {user} = useAuth()
+  const { user, loading } = useAuth();
   const [ratings, setRatings] = useState([]);
 
+  let userId;
+
   useEffect(() => {
-    game.ratings.map((rating) => {
-      if (rating.user !== user._id) {
-        setRatings([...ratings, rating]);
-      }
-    });
-  }, []);
+    if (user) userId = user._id;
+    const ratingsFiltered = game.ratings.filter(
+      (rating) => rating.user !== userId
+    );
+    setRatings(ratingsFiltered);
+  }, [user]);
 
   return (
     <>
-      {ratings.length > 0 && (
-        <div className={style.ratingsList}>
-          <h3 className="title3 ">
-            Confira aqui a avaliação de outros players!
-          </h3>
-          <DivGradient classCSS={style.divGradientGameRatings} />
-          <table className={style.ratingsBody}>
-            <tbody>
-              {game.ratings
-                .filter((element) => element.user !== user._id)
-                .map((filtered) => (
+      {loading ? (
+        <Loading />
+      ) : (
+        ratings.length > 0 && (
+          <div className={style.ratingsList}>
+            <h3 className="title3 ">
+              Confira aqui a avaliação de outros players!
+            </h3>
+            <DivGradient classCSS={style.divGradientGameRatings} />
+            <table className={style.ratingsBody}>
+              <tbody>
+                {ratings.map((filtered) => (
                   <tr key={filtered._id} className={style.ratingRow}>
                     <td>
                       <div
@@ -53,9 +57,10 @@ const GameRatings = ({ game }) => {
                     </td>
                   </tr>
                 ))}
-            </tbody>
-          </table>
-        </div>
+              </tbody>
+            </table>
+          </div>
+        )
       )}
     </>
   );

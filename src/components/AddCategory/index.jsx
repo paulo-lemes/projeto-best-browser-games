@@ -1,57 +1,63 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import style from "./style.module.css";
 import DivGradient from "../DivGradient";
 import Button from "../Button";
 import Input from "../Input";
 import ErrorFetch from "../ErrorFetch";
+import fetchApi from "../../hooks/api";
+import { useGames } from "../../contexts/GamesContext";
 
 const AddCategory = () => {
+  const formData = useRef(null);
   const [error, setError] = useState([]);
-  const [nameCategory, setNameCategory] = useState({
-    name: "",
-  });
+  const { showDialog, fetchGamesCategories } = useGames()
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNameCategory({ ...nameCategory, [name]: value });
+  const postCategory = async (info) => {
+    try {
+      const { data } = await fetchApi("/categories", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        data: JSON.stringify(info),
+      });
+      console.log(data);
+      showDialog("Categoria cadastrada com sucesso!")
+      fetchGamesCategories()
+    } catch (err) {
+      console.log(err.response.data);
+      setError(err.response.data);
+    }
   };
 
-  const handleSave = () => {
-    fetch(`https://api-best-browser-games.vercel.app/categories`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(nameCategory),
-    }).then(async (response) => {
-      console.log(response.status);
-      const resposta = await response.json();
-      console.log(resposta);
-      if (response.status === 201) {
-        window.location.reload();
-      } else {
-        setError(resposta);
-      }
-    });
+  const handleForm = (event) => {
+    event.preventDefault();
+
+    const formInfos = new FormData(formData.current);
+    const category = formInfos.get("category");
+
+    const info = {
+      name: category,
+    };
+
+    postCategory(info);
   };
 
   return (
     <>
       <div className={style.addCategory}>
-        <form>
+        <form ref={formData} onSubmit={handleForm}>
           <Input
             label="Digite aqui uma nova categoria:"
             type="text"
-            name="name"
-            value={nameCategory.name}
-            handleEvent={handleInputChange}
+            name="category"
             classCSS={style.inputNewCategory}
           />
 
           <Button
             text="Inserir"
-            handleEvent={handleSave}
+            type="submit"
             classCSS={`btnGradient ${style.insert}`}
           />
         </form>

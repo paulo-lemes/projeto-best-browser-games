@@ -2,12 +2,12 @@ import { useState } from "react";
 
 const useDialog = () => {
   const [dialogIsOpen, setDialog] = useState(false);
-  const [afterCloseDialog, setAfterCloseDialog] = useState(null);
   const [textDialog, setTextDialog] = useState("");
+  const [confirm, setConfirm] = useState(false);
+  const [handleClick, setHandleClick] = useState(null);
 
   const closeDialog = () => {
     setDialog(false);
-    afterCloseDialog()
   };
 
   const showDialog = (text) => {
@@ -18,9 +18,12 @@ const useDialog = () => {
   return {
     dialogIsOpen,
     textDialog,
+    confirm,
+    handleClick,
     closeDialog,
     showDialog,
-    setAfterCloseDialog,
+    setConfirm,
+    setHandleClick
   };
 };
 
