@@ -24,15 +24,17 @@ const GameRatings = ({ game }) => {
       {loading ? (
         <Loading />
       ) : (
-        ratings.length > 0 && (
-          <div className={style.ratingsList}>
-            <h3 className="title3 ">
-              Confira aqui a avaliação de outros players!
-            </h3>
-            <DivGradient classCSS={style.divGradientGameRatings} />
-            <table className={style.ratingsBody}>
-              <tbody>
-                {ratings.map((filtered) => (
+        <div className={style.ratingsList}>
+          <h3 className="title3">
+            {ratings.length > 0
+              ? "Confira aqui a avaliação de outros players!"
+              : "Esse game ainda não possui avaliações de outros players."}
+          </h3>
+          <DivGradient classCSS={style.divGradientGameRatings} />
+          <table className={style.ratingsBody}>
+            <tbody>
+              {ratings.length > 0 &&
+                ratings.map((filtered) => (
                   <tr key={filtered._id} className={style.ratingRow}>
                     <td>
                       <div
@@ -57,10 +59,9 @@ const GameRatings = ({ game }) => {
                     </td>
                   </tr>
                 ))}
-              </tbody>
-            </table>
-          </div>
-        )
+            </tbody>
+          </table>
+        </div>
       )}
     </>
   );

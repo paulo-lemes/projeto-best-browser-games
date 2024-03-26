@@ -7,12 +7,16 @@ import StarTransparent from "../../assets/CardGameDetails/StarTransparent.svg";
 import ErrorFetch from "../ErrorFetch";
 import style from "./style.module.css";
 import { useAuth } from "../../contexts/AuthContext";
+import { useGames } from "../../contexts/GamesContext";
+import fetchApi from "../../hooks/api";
 
 const CardGameDetails = ({ game }) => {
   const { user } = useAuth();
+  const { fetchGames, showDialog } = useGames();
 
   const [error, setError] = useState([]);
-  const [ratingId, setRatingId] = useState();
+  const [posted, setPosted] = useState(false);
+  const [ratingId, setRatingId] = useState(null);
   const [rateGame, setRateGame] = useState({
     score: 1,
     description: "",
@@ -29,53 +33,35 @@ const CardGameDetails = ({ game }) => {
           description: rating.description,
         });
         setRatingId(rating._id);
+        setPosted(true);
       }
     });
-  }, []);
+  }, [posted]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setRateGame({ ...rateGame, [name]: value });
   };
 
-  const handleSendRating = () => {
-    fetch("https://api-best-browser-games.vercel.app/ratings", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(rateGame),
-    }).then(async (response) => {
-      console.log(response.status);
-      const resposta = await response.json();
-      console.log(resposta);
-      if (response.status === 201) {
-        window.location.reload();
-      } else {
-        setError(resposta);
-      }
-    });
-  };
-
-  const handleEditRating = () => {
-    fetch(`https://api-best-browser-games.vercel.app/ratings/${ratingId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(rateGame),
-    }).then(async (response) => {
-      console.log(response.status);
-      const resposta = await response.json();
-      console.log(resposta);
-      if (response.status === 200) {
-        window.location.reload();
-      } else {
-        setAlert(resposta);
-      }
-    });
+  const handleAction = async (method, action, ratingId = "") => {
+    try {
+      const { data } = await fetchApi(`/ratings${"/" + ratingId}`, {
+        method: method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        data: JSON.stringify(rateGame),
+      });
+      console.log(data);
+      setPosted(true);
+      showDialog(`Avaliação ${action} com sucesso!`);
+      fetchGames();
+      window.scroll(0, 0);
+    } catch (err) {
+      console.log(err.response.data);
+      setError(err.response.data);
+    }
   };
 
   return (
@@ -117,7 +103,7 @@ const CardGameDetails = ({ game }) => {
           {user ? (
             <>
               <div className={style.rateGame}>
-                {ratingId ? (
+                {posted ? (
                   <label>Avaliação feita:</label>
                 ) : (
                   <label>Avalie o game:</label>
@@ -152,17 +138,19 @@ const CardGameDetails = ({ game }) => {
               />
               <div className="divFlexCenter">
                 <ErrorFetch error={error} />
-                {ratingId ? (
+                {posted ? (
                   <Button
                     text="Alterar avaliação"
                     classCSS={`btnGradient ${style.btnSendRating}`}
-                    handleEvent={handleEditRating}
+                    handleEvent={() =>
+                      handleAction("put", "alterada", ratingId)
+                    }
                   />
                 ) : (
                   <Button
                     text="Enviar"
                     classCSS={`btnGradient ${style.btnSendRating}`}
-                    handleEvent={handleSendRating}
+                    handleEvent={() => handleAction("post", "postada")}
                   />
                 )}
               </div>

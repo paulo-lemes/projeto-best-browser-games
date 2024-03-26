@@ -13,7 +13,7 @@ const GameDetails = () => {
   useEffect(() => {
     const game = games.filter((game) => game._id === gameId);
     setGameDetails(game);
-  }, [gameId, loading]);
+  }, [gameId, loading, games]);
 
   return (
     <>
