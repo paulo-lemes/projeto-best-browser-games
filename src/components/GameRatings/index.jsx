@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import DivGradient from "../DivGradient";
-import Star from "../../assets/CardGameDetails/Star.svg";
 import style from "./style.module.css";
 import { useAuth } from "../../contexts/AuthContext";
 import Loading from "../Loading";
+import Stars from "../Stars";
 
 const GameRatings = ({ game }) => {
   const { user, loading } = useAuth();
@@ -42,14 +42,7 @@ const GameRatings = ({ game }) => {
                       >
                         <h4 className="title3">Avaliação</h4>
                         <div className={style.divGameScore}>
-                          <img
-                            src={Star}
-                            className={style.gameScoreImg}
-                            alt={`Estrela de avaliação`}
-                          ></img>
-                          <p className={`description ${style.gameScore}`}>
-                            {filtered.score}/5
-                          </p>
+                          <Stars rating={filtered.score} />
                         </div>
                       </div>
                       <p className={`description ${style.ratingQuote}`}>

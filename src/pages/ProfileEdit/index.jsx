@@ -1,21 +1,35 @@
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import ErrorFetch from "../../components/ErrorFetch";
 import style from "./style.module.css";
 import { useAuth } from "../../contexts/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BorderTopGradient from "../../components/BorderTopGradient";
 import Loading from "../../components/Loading";
 import fetchApi from "../../hooks/api";
 import RestrictedRoute from "../../contexts/RestrictedRoute";
 
 const ProfileEdit = () => {
-  const formData = useRef(null);
+  const { user, loadingUser, getUserApi, showDialog } = useAuth();
   const [error, setError] = useState([]);
-  const { user, loadingUser, getUserApi } = useAuth();
+  const [infosProfile, setInfosProfile] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    birthDate: "",
+    country: "",
+    state: "",
+  });
+  const navigate = useNavigate();
 
-  const putProfile = async (infos) => {
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setInfosProfile({ ...infosProfile, [name]: value });
+  };
+
+  const putProfile = async () => {
     try {
       const { data } = await fetchApi(`/users/${user._id}`, {
         method: "put",
@@ -23,40 +37,17 @@ const ProfileEdit = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        data: JSON.stringify(infos),
+        data: JSON.stringify(infosProfile),
       });
       console.log(data);
       getUserApi(user._id);
+      showDialog("Cadastro alterado com sucesso!");
+      window.scroll(0, 0);
+      navigate("/profile");
     } catch (err) {
       console.log(err.response.data);
       setError(err.response.data);
     }
-  };
-
-  const handleForm = (event) => {
-    event.preventDefault();
-
-    const formInfos = new FormData(formData.current);
-    const name = formInfos.get("name") || user.name;
-    const email = formInfos.get("email") || user.email;
-    const password = formInfos.get("password");
-    const confirmPassword = formInfos.get("confirmPassword");
-    const birthDate = formInfos.get("birthDate") || user.birthDate;
-    const country = formInfos.get("country") || user.country;
-    const state = formInfos.get("state") || user.state;
-
-    const infos = {
-      name: name,
-      email: email,
-      password: password,
-      confirmPassword: confirmPassword,
-      birthDate: birthDate,
-      country: country,
-      state: state,
-    };
-
-    console.log(infos);
-    putProfile(infos);
   };
 
   const handleFocus = (event) => {
@@ -69,6 +60,19 @@ const ProfileEdit = () => {
     }
   };
 
+  useEffect(() => {
+    if (user)
+      setInfosProfile({
+        name: user.name,
+        email: user.email,
+        password: "",
+        confirmPassword: "",
+        birthDate: user.dataNasc,
+        country: user.country,
+        state: user.state,
+      });
+  }, [user, loadingUser]);
+
   return (
     <>
       <BorderTopGradient />
@@ -80,24 +84,32 @@ const ProfileEdit = () => {
             {user && (
               <div className={`divFlexCenter ${style.divEditUser}`}>
                 <h2 className="">Altere as informações de cadastro</h2>
-                <form ref={formData} onSubmit={handleForm}>
+                <form>
                   <Input
                     label="Nome:"
                     type="text"
                     name="name"
-                    placeholder={user.name}
+                    value={infosProfile.name}
+                    handleEvent={handleInputChange}
                   />
                   <Input
                     label="E-mail:"
                     type="email"
                     name="email"
-                    placeholder={user.email}
+                    value={infosProfile.email}
+                    handleEvent={handleInputChange}
                   />
-                  <Input label="Senha:" type="password" name="password" />
+                  <Input
+                    label="Senha:"
+                    type="password"
+                    name="password"
+                    handleEvent={handleInputChange}
+                  />
                   <Input
                     label="Confirme a senha:"
                     type="password"
                     name="confirmPassword"
+                    handleEvent={handleInputChange}
                   />
                   <label htmlFor="birthDate" className="label">
                     Data de nascimento:
@@ -105,31 +117,33 @@ const ProfileEdit = () => {
                   <input
                     type="text"
                     name="birthDate"
-                    placeholder={user.dataNasc}
+                    value={infosProfile.birthDate}
                     className="inputBorderGradient"
                     onFocus={handleFocus}
                     onBlur={handleBlur}
+                    onChange={handleInputChange}
                   ></input>
                   <Input
                     label="País:"
                     type="text"
                     name="country"
-                    placeholder={user.country}
+                    value={infosProfile.country}
+                    handleEvent={handleInputChange}
                   />
                   <Input
                     label="Estado:"
                     type="text"
                     name="state"
-                    placeholder={user.state}
+                    value={infosProfile.state}
+                    handleEvent={handleInputChange}
                   />
                   <ErrorFetch error={error} />
                   <div className={style.divBtnsEditUser}>
-                    <button
-                      type="submit"
-                      className={`btnGradient ${style.btnEditUser}`}
-                    >
-                      Alterar
-                    </button>
+                    <Button
+                      text="Alterar"
+                      classCSS={`btnGradient ${style.btnEditUser}`}
+                      handleEvent={putProfile}
+                    />
                     <Link to="/profile" onClick={() => window.scroll(0, 0)}>
                       <Button text="Voltar" classCSS="btnBorderGradient" />
                     </Link>

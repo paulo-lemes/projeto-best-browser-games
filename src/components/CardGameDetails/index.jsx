@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import Input from "../Input";
 import Button from "../Button";
 import Star from "../../assets/CardGameDetails/Star.svg";
-import StarTransparent from "../../assets/CardGameDetails/StarTransparent.svg";
 import ErrorFetch from "../ErrorFetch";
 import style from "./style.module.css";
 import { useAuth } from "../../contexts/AuthContext";
 import { useGames } from "../../contexts/GamesContext";
 import fetchApi from "../../hooks/api";
+import RatingStars from "../RatingStars";
 
 const CardGameDetails = ({ game }) => {
   const { user } = useAuth();
@@ -38,9 +38,8 @@ const CardGameDetails = ({ game }) => {
     });
   }, [posted]);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setRateGame({ ...rateGame, [name]: value });
+  const handleInputChange = (value) => {
+    setRateGame({ ...rateGame, score: value });
   };
 
   const handleAction = async (method, action, ratingId = "") => {
@@ -108,26 +107,10 @@ const CardGameDetails = ({ game }) => {
                 ) : (
                   <label>Avalie o game:</label>
                 )}
-                <div className={style.starsRating}>
-                  <select
-                    className={`inputBorderGradient ${style.rateScore}`}
-                    name="score"
-                    onChange={handleInputChange}
-                    value={rateGame.score}
-                  >
-                    <option value={1}>1</option>
-                    <option value={2}>2</option>
-                    <option value={3}>3</option>
-                    <option value={4}>4</option>
-                    <option value={5}>5</option>
-                  </select>
-                  <p className={`description ${style.maxRating}`}>/5</p>
-                  <img
-                    src={StarTransparent}
-                    className={style.ratingStar}
-                    alt={`Estrela de avaliação`}
-                  ></img>
-                </div>
+                <RatingStars
+                  rating={rateGame.score}
+                  handleInputChange={handleInputChange}
+                />
               </div>
               <Input
                 classCSS={style.ratingDescription}

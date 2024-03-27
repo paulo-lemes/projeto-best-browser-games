@@ -13,6 +13,7 @@ import GameDetails from "./pages/GameDetails";
 import Admin from "./pages/Admin";
 import HandleCategory from "./pages/HandleCategory";
 import EditGame from "./pages/EditGame";
+import Test from "./pages/Test";
 
 const Router = () => {
   return (
@@ -37,6 +38,7 @@ const Router = () => {
             element={<HandleCategory />}
           />
           <Route path="/editGame/:gameId" element={<EditGame />} />
+          <Route path="/test" element={<Test />} />
         </Route>
       </Routes>
     </BrowserRouter>
