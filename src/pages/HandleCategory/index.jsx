@@ -13,7 +13,8 @@ import { useGames } from "../../contexts/GamesContext";
 const HandleCategory = () => {
   const { loadingUser } = useAuth();
   const { categoryId, categoryName } = useParams();
-  const { showDialog, fetchGamesCategories } = useGames();
+  const { showDialog, fetchGamesCategories, setConfirm, setHandleClick } =
+    useGames();
   const [error, setError] = useState([]);
   const navigate = useNavigate();
 
@@ -37,6 +38,7 @@ const HandleCategory = () => {
         data: JSON.stringify(nameCategory),
       });
       console.log(data);
+      setConfirm(false);
       showDialog(`Categoria ${action} com sucesso!`);
       fetchGamesCategories();
       window.scroll(0, 0);
@@ -45,6 +47,14 @@ const HandleCategory = () => {
       console.log(err.response.data);
       setError(err.response.data);
     }
+  };
+
+  const handleDelete = () => {
+    setConfirm(true);
+    setHandleClick(() => () => handleAction("delete", "excluída"));
+    showDialog(
+      "Tem certeza que deseja excluir a categoria? Não será possível desfazer a ação."
+    );
   };
 
   return (
@@ -73,7 +83,7 @@ const HandleCategory = () => {
                 <Button
                   text="Excluir"
                   classCSS="btnBorderGradient"
-                  handleEvent={() => handleAction("delete", "excluída")}
+                  handleEvent={handleDelete}
                 />
               </div>
             </form>

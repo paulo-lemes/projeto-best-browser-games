@@ -55,7 +55,7 @@ const DeleteGame = () => {
           EDITAR OU EXCLUIR <span className="titleGradient">GAME</span>
         </h2>
         <div className={style.deleteGame}>
-          <form className="">
+          <form>
             <select
               name="games"
               onChange={handleSelectChange}

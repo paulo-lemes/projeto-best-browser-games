@@ -9,7 +9,7 @@ import fetchApi from "../../hooks/api";
 const Register = () => {
   const formData = useRef(null);
   const [error, setError] = useState([]);
-  const { handleLogin } = useAuth();
+  const { handleLogin, showDialog } = useAuth();
 
   const postLogin = async (infos) => {
     try {
@@ -22,7 +22,7 @@ const Register = () => {
       });
       console.log(data);
       handleLogin(data.token);
-      // showDialog("Login realizado com sucesso!")
+      showDialog("Cadastro realizado com sucesso!");
     } catch (err) {
       console.log(err.response.data);
       setError(err.response.data);
