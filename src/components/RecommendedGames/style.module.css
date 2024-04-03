@@ -1,0 +1,9 @@
+.titleRatedGames {
+  margin-bottom: 40px;
+}
+
+.divGamesCard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

@@ -1,0 +1,38 @@
+.ratingsList {
+  padding: 40px 90px;
+}
+
+.divGradientGameRatings {
+  width: 100%;
+  margin-top: 40px;
+  margin-bottom: 90px;
+}
+
+.divGameScore {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.divRatingGameScore {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.borderRating {
+  height: 45px;
+  border-bottom: 2px solid var(--USE, #89347c);
+  border-right: 2px solid var(--USE, #89347c);
+  margin-bottom: 90px;
+}
+
+.ratingsBody {
+  width: 100%;
+}
+
+.ratingQuote {
+  font-style: italic;
+  font-weight: 400;
+  margin-bottom: -20px;
+}

@@ -1,0 +1,13 @@
+.divHandleCategory {
+  margin: 40px 0 80px 0;
+}
+
+.divBtnsHandleCategory {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.btnHandleCategory {
+  margin: 0 10px;
+}
