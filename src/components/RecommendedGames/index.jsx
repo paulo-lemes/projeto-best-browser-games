@@ -46,7 +46,7 @@ const RecommendedGames = () => {
           <div className={style.divGamesCard}>
             {games.length > 0 ? (
               games.map((game) => (
-                <Link to={`/gameDetails/${game._id}`} key={game._id}>
+                <Link to={`/games/gameDetails/${game._id}`} key={game._id}>
                   <CardGame game={game} />
                 </Link>
               ))
