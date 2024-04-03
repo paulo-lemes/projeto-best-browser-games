@@ -46,13 +46,18 @@
   align-items: center;
 }
 
-.description {
+.description,
+.descriptionSpaced {
   color: #fff;
   font-family: Poppins, sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+}
+
+.descriptionSpaced {
+  margin-bottom: 40px;
 }
 
 .titleGradientHome {

@@ -23,7 +23,7 @@ const Categories = () => {
               gostos. Encontre seu próximo favorito aqui!
             </p>
             {categories.map((category) => (
-              <Link to={`/games/${category._id}/${category.name}`} key={category._id}>
+              <Link to={`/categories/${category._id}/${category.name}`} key={category._id}>
                 <Button
                   text={category.name}
                   classCSS={`btnBorderGradient ${style.category}`}

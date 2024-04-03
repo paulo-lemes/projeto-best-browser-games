@@ -44,6 +44,6 @@ footer {
   margin: 0 12px;
 
   &:hover {
-    transform: scale(0.87);
+    transform: scale(1.13);
   }
 }

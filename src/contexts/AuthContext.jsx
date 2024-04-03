@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import fetchApi from "../hooks/api";
 import { jwtDecode } from "jwt-decode";
 import Dialog from "../components/Dialog";
@@ -13,7 +19,7 @@ export const AuthProvider = ({ children }) => {
   const [loadingUser, setLoadingUser] = useState(true);
   const { dialogIsOpen, textDialog, closeDialog, showDialog } = useDialog();
 
-  const getUserApi = async (id) => {
+  const getUserApi = useCallback(async (id) => {
     try {
       const { data } = await fetchApi(`/users/${id}`);
       console.log(data);
@@ -28,23 +34,23 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("user", JSON.stringify(userInfo));
     } catch (err) {
       console.log(err.response.message);
-      showDialog("Houve um erro ao realizar o login. Tente novamente.")
+      showDialog("Houve um erro ao realizar o login. Tente novamente.");
     }
     setLoadingUser(false);
-  };
+  }, []);
 
-  const handleLogin = (token) => {
+  const handleLogin = useCallback((token) => {
     localStorage.setItem("token", token);
     const decoded = jwtDecode(token);
     getUserApi(decoded.id);
-  };
+  }, []);
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
     showDialog("Logout realizado com sucesso");
-  };
+  }, []);
 
   useEffect(() => {
     const savedLogin = localStorage.getItem("user");
@@ -63,7 +69,7 @@ export const AuthProvider = ({ children }) => {
         handleLogin,
         handleLogout,
         getUserApi,
-        showDialog
+        showDialog,
       }}
     >
       {children}

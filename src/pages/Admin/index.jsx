@@ -4,14 +4,21 @@ import CategoriesAdmin from "../../components/CategoriesAdmin";
 import RestrictedRoute from "../../contexts/RestrictedRoute";
 import { useAuth } from "../../contexts/AuthContext";
 import Loading from "../../components/Loading";
+import { useGames } from "../../contexts/GamesContext";
+import { useEffect } from "react";
 
 const Admin = () => {
   const { loadingUser } = useAuth();
+  const { handleSearchCategory } = useGames();
+
+  useEffect(() => {
+    handleSearchCategory("");
+  }, []);
 
   return (
     <>
       {loadingUser ? (
-        <Loading/>
+        <Loading />
       ) : (
         <RestrictedRoute page="admin">
           <div className="divFlexCenter divAccessAdmin">

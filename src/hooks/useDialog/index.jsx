@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 const useDialog = () => {
   const [dialogIsOpen, setDialog] = useState(false);
@@ -6,14 +6,14 @@ const useDialog = () => {
   const [confirm, setConfirm] = useState(false);
   const [handleClick, setHandleClick] = useState(null);
 
-  const closeDialog = () => {
+  const closeDialog = useCallback(() => {
     setDialog(false);
-  };
+  }, []);
 
-  const showDialog = (text) => {
+  const showDialog = useCallback((text) => {
     setTextDialog(text);
     setDialog(true);
-  };
+  }, []);
 
   return {
     dialogIsOpen,
@@ -23,7 +23,7 @@ const useDialog = () => {
     closeDialog,
     showDialog,
     setConfirm,
-    setHandleClick
+    setHandleClick,
   };
 };
 

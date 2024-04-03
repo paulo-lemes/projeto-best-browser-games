@@ -1,4 +1,11 @@
-import { createContext, useContext, useEffect, useState, useMemo } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+} from "react";
 import fetchApi from "../hooks/api";
 import Dialog from "../components/Dialog";
 import useDialog from "../hooks/useDialog";
@@ -31,23 +38,23 @@ export const GamesProvider = ({ children }) => {
     fetchGamesCategories();
   }, []);
 
-  const handleSearchGames = async () => {
+  const handleSearchGames = useCallback(async () => {
     await fetchGames();
-  };
+  }, []);
 
-  const handleInputText = (event) => {
+  const handleInputText = useCallback((event) => {
     setSearchText(event.target.value);
-  };
+  }, []);
 
-  const handleInputSelect = (event) => {
+  const handleInputSelect = useCallback((event) => {
     console.log(event.target.value);
     setSearchCategory(event.target.value);
-  };
+  }, []);
 
-  const handleSearchCategory = (categoryId) => {
+  const handleSearchCategory = useCallback((categoryId) => {
     setSearchText("");
     setSearchCategory(categoryId);
-  };
+  }, []);
 
   const games = useMemo(() => {
     const searchTextLowerCase = searchText.toLowerCase();
@@ -59,7 +66,7 @@ export const GamesProvider = ({ children }) => {
     return gamesFilter;
   }, [gamesUnfiltered, searchText, searchCategory]);
 
-  const fetchGames = async () => {
+  const fetchGames = useCallback(async () => {
     try {
       const { data } = await fetchApi.get(`games`);
       console.log(data);
@@ -72,9 +79,9 @@ export const GamesProvider = ({ children }) => {
         setLoading(false);
       }, 1000);
     }
-  };
+  }, []);
 
-  const fetchGamesCategories = async () => {
+  const fetchGamesCategories = useCallback(async () => {
     try {
       const { data } = await fetchApi.get(`categories`);
       console.log(data);
@@ -83,7 +90,7 @@ export const GamesProvider = ({ children }) => {
       console.log(err.data.message);
     }
     setLoadingCategories(false);
-  };
+  }, []);
 
   return (
     <GamesContext.Provider

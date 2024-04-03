@@ -26,10 +26,10 @@ const Router = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/profileEdit" element={<ProfileEdit />} />
           <Route path="/games" element={<Games />} />
-          <Route path="/gameDetails/:gameId" element={<GameDetails />} />
+          <Route path="/games/gameDetails/:gameId" element={<GameDetails />} />
           <Route path="/categories" element={<Categories />} />
           <Route
-            path="/games/:categoryId/:categoryName"
+            path="/categories/:categoryId/:categoryName"
             element={<GamesCategory />}
           />
           <Route path="/admin" element={<Admin />} />
