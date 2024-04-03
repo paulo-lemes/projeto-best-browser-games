@@ -17,7 +17,7 @@ import Test from "./pages/Test";
 
 const Router = () => {
   return (
-    <BrowserRouter basename={"/projeto-best-browser-games/"}>
+    <BrowserRouter>
       <Routes>
         <Route path="" element={<DefaultLayout />}>
           <Route path="/" element={<Home />} />

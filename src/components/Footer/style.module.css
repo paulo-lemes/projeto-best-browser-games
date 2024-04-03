@@ -42,8 +42,8 @@ footer {
 }
 .icons a {
   margin: 0 12px;
+}
 
-  &:hover {
-    transform: scale(1.13);
-  }
+.icons a:hover {
+  transform: scale(1.13);
 }
