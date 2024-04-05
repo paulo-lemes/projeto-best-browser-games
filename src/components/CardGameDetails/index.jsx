@@ -172,7 +172,7 @@ const CardGameDetails = ({ game }) => {
         </div>
       </div>
       <div className={`divFlexCenter ${style.divBtnPrevious}`}>
-        <Link to="/games">
+        <Link to="/games" onClick={() => window.scroll(0, 0)}>
           <Button text="Voltar" classCSS="btnBorderGradient" />
         </Link>
       </div>

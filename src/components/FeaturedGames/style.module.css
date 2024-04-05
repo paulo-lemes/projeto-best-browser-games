@@ -1,0 +1,47 @@
+.divCarousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.divTitle {
+  margin: 30px 110px 60px 110px;
+}
+
+.titleGradient {
+  background: linear-gradient(96deg, #f77e75 42.13%, #89347c 83.23%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.carousel {
+  width: 100%;
+  max-width: 1300px;
+  min-width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner::-webkit-scrollbar {
+  display: none;
+}
+
+.inner {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.item {
+  flex: none;
+}
+
+.item a div {
+  margin: 0 5px;
+}
+
+.btnCarousel {
+  margin: 50px auto;
+}
