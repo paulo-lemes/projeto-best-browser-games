@@ -8,6 +8,7 @@ import Games from "../Games";
 import Button from "../../components/Button";
 import DivGradient from "../../components/DivGradient";
 import { useAuth } from "../../contexts/AuthContext";
+import FeaturedGames from "../../components/FeaturedGames";
 
 const Home = () => {
   const { user } = useAuth();
@@ -68,7 +69,8 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <Games />
+      <FeaturedGames />
+      {/* <Games /> */}
     </>
   );
 };

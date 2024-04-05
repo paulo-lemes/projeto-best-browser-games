@@ -28,7 +28,7 @@ const Dialog = ({ closeDialog, textDialog, confirm, handleClick }) => {
         <button onClick={handleClick} className={style.btnContinue}> 
           Continuar
         </button>
-        <button onClick={closeDialog} className={style.btnGoCart}>
+        <button onClick={closeDialog} className={style.btnCancel}>
           Cancelar
         </button>
       </div>
