@@ -4,14 +4,18 @@ import Card1 from "../../assets/Home/Card-1.png";
 import Card2 from "../../assets/Home/Card-2.png";
 import Stars from "../../assets/Home/Stars.png";
 import Union from "../../assets/Home/Union.svg";
-import Games from "../Games";
 import Button from "../../components/Button";
 import DivGradient from "../../components/DivGradient";
 import { useAuth } from "../../contexts/AuthContext";
+import SearchGames from "../../components/SearchGames";
+import GamesCards from "../../components/GamesCards";
 import FeaturedGames from "../../components/FeaturedGames";
+import { useGames } from "../../contexts/GamesContext";
 
 const Home = () => {
   const { user } = useAuth();
+  const { searchText, searchCategory } = useGames();
+
   return (
     <>
       <div className={style.geral}>
@@ -69,8 +73,8 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <FeaturedGames />
-      {/* <Games /> */}
+      <SearchGames />
+      {searchText || searchCategory ? <GamesCards /> : <FeaturedGames />}
     </>
   );
 };

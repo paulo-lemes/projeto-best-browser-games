@@ -108,6 +108,8 @@ export const GamesProvider = ({ children }) => {
         showDialog,
         setConfirm,
         setHandleClick,
+        searchText,
+        searchCategory
       }}
     >
       {children}
