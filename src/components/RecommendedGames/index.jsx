@@ -38,23 +38,21 @@ const RecommendedGames = () => {
       {loading ? (
         <Loading />
       ) : (
-        <>
-          <h2 className={`title2 ${style.titleRatedGames}`}>
-            GAMES <span className="titleGradient">RECOMENDADOS</span>
-          </h2>
-          <DivGradient />
-          <div className={style.divGamesCard}>
-            {games.length > 0 ? (
-              games.map((game) => (
+        games.length > 0 && (
+          <>
+            <h2 className={`title2 ${style.titleRatedGames}`}>
+              GAMES <span className="titleGradient">RECOMENDADOS</span>
+            </h2>
+            <DivGradient />
+            <div className={style.divGamesCard}>
+              {games.map((game) => (
                 <Link to={`/games/gameDetails/${game._id}`} key={game._id}>
                   <CardGame game={game} />
                 </Link>
-              ))
-            ) : (
-              <p className="loading">Nenhum jogo encontrado</p>
-            )}
-          </div>
-        </>
+              ))}
+            </div>
+          </>
+        )
       )}
     </>
   );
