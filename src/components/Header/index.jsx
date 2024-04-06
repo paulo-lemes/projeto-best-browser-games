@@ -43,11 +43,13 @@ const Header = () => {
           )}
         </ul>
         <div className={style.dropdown}>
-          <img
-            src={UserLogin}
-            className={style.userLogin}
-            alt="Ícone Usuário"
-          />
+          <Link to={user ? "/profile" : "/login"}>
+            <img
+              src={UserLogin}
+              className={style.userLogin}
+              alt="Ícone Usuário"
+            />
+          </Link>
           <div className={style.dropdownContent}>
             {user && user.roles === "admin" && (
               <div>
