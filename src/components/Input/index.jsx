@@ -6,7 +6,7 @@ const Input = ({
   value,
   handleEvent,
   label,
-  classCSS,
+  classCSS = "",
   placeholder,
   textarea,
 }) => {

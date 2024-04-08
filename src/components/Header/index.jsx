@@ -14,7 +14,7 @@ const Header = () => {
 
   return (
     <>
-      <div className={style.navbar}>
+      <header className={style.navbar}>
         <NavLink to="/">
           <img
             src={Logo}
@@ -24,7 +24,7 @@ const Header = () => {
         </NavLink>
         <ul>
           <NavLink to="/" className={activeClass}>
-            <li>Home</li>
+            <li className={style.home}>Home</li>
           </NavLink>
           <NavLink to="/games" className={activeClass}>
             <li>Games</li>
@@ -34,11 +34,11 @@ const Header = () => {
           </NavLink>
           {user ? (
             <NavLink to="/profile" className={activeClass}>
-              <li>Perfil</li>
+              <li className={style.profile}>Perfil</li>
             </NavLink>
           ) : (
             <NavLink to="/login" className={activeClass}>
-              <li> Entrar</li>
+              <li className={style.login}> Entrar</li>
             </NavLink>
           )}
         </ul>
@@ -58,10 +58,10 @@ const Header = () => {
                 </Link>
               </div>
             )}
-            {user && <Button text="Sair" handleEvent={handleLogout} />}
+            {user && <Button text="Sair" handleEvent={handleLogout} classCSS={style.logout}/>}
           </div>
         </div>
-      </div>
+      </header>
       <ArrowLineUp
         size={32}
         color="#fcfcfc"

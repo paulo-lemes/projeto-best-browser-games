@@ -1,31 +1,6 @@
-.divGradientAddCategory {
-  width: 800px;
-  margin-top: 30px;
-  margin-bottom: 130px;
-}
-
-.addCategory {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.divAddCategory {
-  margin-top: 200px;
-}
-
-.addCategory > form {
-  width: 800px;
-  display: inline;
-}
-
-.inputNewCategory {
-  width: 610px;
-}
-
 .categoryButtons {
   width: 800px;
+  max-width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -42,18 +17,18 @@ button.category {
   margin: 30px 12px 0px 12px;
 }
 
-button.insert {
-  margin-left: 15px;
-}
+@media (max-width: 767px) {
+  .categoryButtons {
+    margin-bottom: 50px;
+  }
 
-.divHandleCategory {
-  margin: 40px 0 80px 0;
-}
+  .categoryButtons > p {
+    margin: 15px 10px;
+    text-align: center;
+  }
 
-.divBtnsHandleCategory {
-  margin: 40px 0;
-}
-
-.btnHandleCategory {
-  margin: 0 10px;
+  button.category {
+    margin: 15px 6px 0px 6px;
+    width: 140px;
+  }
 }

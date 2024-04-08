@@ -1,11 +1,13 @@
 body {
-  opacity: 0.75;
+  opacity: 0.85;
   color: #fff;
   font-family: Poppins;
   font-size: 25px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  width: 100%;
+  max-width: 100%;
 }
 
 .navbar {
@@ -64,4 +66,54 @@ li {
   bottom: 10px;
   cursor: pointer;
   z-index: 1;
+}
+
+@media (max-width: 767px) {
+  .home,
+  .profile,
+  .login {
+    display: none;
+  }
+
+  body {
+    font-size: 15px;
+  }
+
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  ul {
+    display: flex;
+  }
+
+  li {
+    margin: 0 10px;
+  }
+
+  .logo {
+    width: 50px;
+    margin: 20px 20px;
+    margin-right: 70px;
+  }
+
+  .userLogin {
+    width: 30px;
+  }
+
+  .dropdownContent {
+    font-size: 10px;
+    text-align: left;
+    padding: 3px 5px;
+  }
+
+  .logout {
+    display: none;
+  }
+
+  .top {
+    width: 25px;
+  }
 }
