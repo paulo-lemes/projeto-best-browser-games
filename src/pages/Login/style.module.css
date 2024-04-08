@@ -41,3 +41,19 @@ button.register {
 span {
   margin-top: 20px;
 }
+
+@media (max-width: 767px) {
+  h2.titleLogin {
+    margin-top: 30px;
+  }
+
+  form.login {
+    max-width: 90%;
+  }
+
+  p.descLogin {
+    margin-top: 80px;
+    text-align: center;
+    max-width: 90%;
+  }
+}
