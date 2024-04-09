@@ -1,32 +1,12 @@
-option {
-  background-color: black;
-  color: white;
-}
-
-.inputNewGame {
-  width: 800px;
-}
-
-.inputDescription {
-  height: 115px;
-}
-
-button.insertNewGame {
-  margin-top: 100px;
-  margin-bottom: 130px;
-}
-
-.errorNewGame {
-  margin-bottom: -50px;
-}
-
 .deleteGame {
   margin-top: 30px;
   margin-bottom: 80px;
+  max-width: 100%;
 }
 
-.deleteGame > form {
+.deleteGame form {
   width: 800px;
+  max-width: 100%;
   display: inline;
 }
 
@@ -38,36 +18,26 @@ button.insertNewGame {
   width: 610px;
 }
 
-.titleGradientSearch {
-  background: linear-gradient(96deg, #f77e75 42.13%, #89347c 83.23%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+@media (max-width: 768px) {
+  .deleteGame {
+    max-width: 90%;
+  }
 
-.divSearchGame {
-  margin-bottom: 50px;
-}
+  .titleDeleteGame {
+    text-align: center;
+  }
 
-.inputSearchName {
-  width: 850px;
-  background: url("./SearchIcon.svg") no-repeat left;
-  background-size: 18px;
-  background-position: 25px;
-  padding-left: 70px;
-  color: #FFF;
-}
+  .btnDeleteGame {
+    margin: 15px auto;
+    margin-right: 15px;
+  }
 
-.inputSearchCategory {
-  width: 240px;
-  margin: 0 18px;
-  background: url("./DownIcon.svg") no-repeat left;
-  background-size: 18px;
-  background-position: 25px;
-  padding-left: 70px;
-  color: #FFF;
-}
+  .deleteGame button {
+    width: 125px;
+    height: 45px;
+  }
 
-.titleSearchGames {
-  margin-bottom: 70px;
+  .deleteGame form select {
+    width: 100%;
+  }
 }

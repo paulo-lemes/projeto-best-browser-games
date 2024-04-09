@@ -38,13 +38,25 @@ const Profile = () => {
                 <p className="description">Estado: {user.state}</p>
               </div>
               <div className={style.divBtnsProfile}>
-              <Link to="/profileEdit" onClick={() => window.scroll(0, 0)}>
+                <Link to="/profileEdit" onClick={() => window.scroll(0, 0)}>
+                  <Button
+                    text="Alterar cadastro"
+                    classCSS={`btnGradient ${style.btnCallEditPage}`}
+                  />
+                </Link>
+                {user && user.roles === "admin" && (
+                  <Link to="/admin" onClick={() => window.scroll(0, 0)}>
+                    <Button
+                      text="Acesso Admin"
+                      classCSS={`btnGradient ${style.btnCallEditPage}`}
+                    />
+                  </Link>
+                )}
                 <Button
-                  text="Alterar cadastro"
-                  classCSS={`btnGradient ${style.btnCallEditPage}`}
+                  text="Sair do perfil"
+                  classCSS="btnBorderGradient"
+                  handleEvent={handleLogout}
                 />
-              </Link>
-              <Button text="Sair do perfil" classCSS="btnBorderGradient" handleEvent={handleLogout}/>
               </div>
               <RecommendedGames />
             </div>

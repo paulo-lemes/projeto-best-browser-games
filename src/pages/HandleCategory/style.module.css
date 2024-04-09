@@ -11,3 +11,22 @@
 .btnHandleCategory {
   margin: 0 10px;
 }
+
+@media (max-width: 768px) {
+  .divHandleCategory {
+    margin: 30px 0 40px 0;
+  }
+
+  .divHandleCategory form {
+    max-width: 90%;
+  }
+
+  .divHandleCategory h2 {
+    text-align: center;
+  }
+
+  .divBtnsHandleCategory button {
+    width: 120px;
+    height: 45px;
+  }
+}

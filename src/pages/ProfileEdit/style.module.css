@@ -35,6 +35,25 @@
   padding: 25px 100px 25px 25px;
 }
 
-.pUserInfo{
-    margin-bottom: 5px;
+.pUserInfo {
+  margin-bottom: 5px;
+}
+
+@media (max-width: 767px) {
+  .divBtnsEditUser {
+    margin: 50px 0 70px 0;
+  }
+
+  .divBtnsEditUser button {
+    width: 120px;
+    height: 45px;
+  }
+
+  .divEditUser form {
+    max-width: 90%;
+  }
+
+  .btnEditUser {
+    margin-right: 10px;
+  }
 }

@@ -7,3 +7,15 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.divGradientRecommendedGames {
+  margin-bottom: 20px;
+  max-width: 90%;
+}
+
+@media (max-width: 768px) {
+  .titleRatedGames {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+}

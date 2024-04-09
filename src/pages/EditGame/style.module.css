@@ -1,6 +1,5 @@
-option {
-  background-color: black;
-  color: white;
+.divEditGame {
+  width: 100%;
 }
 
 .inputEditGame {
@@ -11,10 +10,6 @@ option {
   height: 115px;
 }
 
-.errorNewGame {
-  margin-bottom: -50px;
-}
-
 .divBtnsEditGame {
   display: flex;
   justify-content: center;
@@ -23,4 +18,35 @@ option {
 
 .btnEditGame {
   margin-right: 15px;
+}
+
+@media (max-width: 768px) {
+  .divEditGame form {
+    max-width: 90%;
+  }
+
+  .divEditGame {
+      margin-top: 20px;
+  }
+
+  .divEditGame h2 {
+    margin-bottom: 10px;
+  }
+
+  .inputDescription {
+    height: 180px;
+  }
+
+  .divBtnsEditGame {
+    margin: 70px 0 80px 0;
+  }
+
+  .divBtnsEditGame button {
+    width: 130px;
+    height: 45px;
+  }
+
+  .btnEditGame {
+    margin-right: 10px;
+  }
 }

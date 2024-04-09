@@ -70,7 +70,7 @@ const EditGame = () => {
         <Loading />
       ) : (
         <RestrictedRoute page="admin">
-          <div className={`divFlexCenter ${style.divEditUser}`}>
+          <div className={`divFlexCenter ${style.divEditGame}`}>
             <h2 className="title3">Altere as informações do game</h2>
             <form>
               <Input

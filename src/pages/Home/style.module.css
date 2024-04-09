@@ -22,6 +22,7 @@
 .borda {
   position: absolute;
   z-index: -1;
+  max-width: 90%;
 }
 
 .home2 {
@@ -69,4 +70,91 @@
   font-style: normal;
   font-weight: 900;
   line-height: 108.434%;
+}
+
+@media (max-width: 1024px) {
+  .geral {
+    margin-left: 5vw;
+    margin-right: 5vw;
+    gap: 6vh;
+    margin-top: 3vw;
+  }
+
+  .home1 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home1 img {
+    order: 0;
+    margin-bottom: 5vh;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .chamada1 {
+    gap: 5vh;
+    order: 1;
+  }
+
+  .home2 {
+    flex-direction: column;
+    gap: 2vh;
+    box-sizing: content-box;
+    border: none;
+    margin-bottom: 5vh;
+  }
+
+  .home2 img {    
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .chamada2 {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4vh;
+    margin: 4vh 0;
+  }
+
+  .borda {
+    display: none;
+  }
+
+  .estrela {
+    flex-direction: column;
+  }
+
+  .estrela img {
+    width: 250px;
+    margin-bottom: 2vh;
+  }
+
+  .description,
+  .descriptionSpaced {
+    color: #fff;
+    font-family: Poppins, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .descriptionSpaced {
+    margin-bottom: 40px;
+  }
+
+  .titleGradientHome {
+    background: linear-gradient(96deg, #f77e75 42.13%, #89347c 83.23%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 108.434%;
+  }
 }

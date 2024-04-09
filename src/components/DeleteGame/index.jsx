@@ -51,7 +51,7 @@ const DeleteGame = () => {
   return (
     <>
       <div className="divFlexCenter">
-        <h2 className="title2">
+        <h2 className={`title2 ${style.titleDeleteGame}`}>
           EDITAR OU EXCLUIR <span className="titleGradient">GAME</span>
         </h2>
         <div className={style.deleteGame}>

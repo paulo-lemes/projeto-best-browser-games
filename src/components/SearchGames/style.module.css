@@ -3,41 +3,6 @@ option {
   color: white;
 }
 
-.inputNewGame {
-  width: 800px;
-}
-
-.inputDescription {
-  height: 115px;
-}
-
-button.insertNewGame {
-  margin-top: 100px;
-  margin-bottom: 130px;
-}
-
-.errorNewGame {
-  margin-bottom: -50px;
-}
-
-.deleteGame {
-  margin-top: 30px;
-  margin-bottom: 80px;
-}
-
-.deleteGame > form {
-  width: 800px;
-  display: inline;
-}
-
-.btnDeleteGame {
-  margin-left: 15px;
-}
-
-.inputDeleteGame {
-  width: 610px;
-}
-
 .titleGradientSearch {
   background: linear-gradient(96deg, #f77e75 42.13%, #89347c 83.23%);
   background-clip: text;
@@ -55,7 +20,7 @@ button.insertNewGame {
   background-size: 18px;
   background-position: 25px;
   padding-left: 70px;
-  color: #FFF;
+  color: #fff;
 }
 
 .inputSearchCategory {
@@ -65,9 +30,45 @@ button.insertNewGame {
   background-size: 18px;
   background-position: 25px;
   padding-left: 70px;
-  color: #FFF;
+  color: #fff;
 }
 
 .titleSearchGames {
   margin-bottom: 70px;
+}
+
+@media (max-width: 1024px) {
+  .divSearchGame {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .inputSearchName {
+    width: 90%;
+    background-size: 15px;
+    background-position: 20px;
+    padding-left: 50px;
+    margin-bottom: 10px;
+  }
+
+  .inputSearchCategory {
+    width: 75%;
+    margin: 0;
+    background-size: 15px;
+    background-position: 20px;
+    padding-left: 70px;
+    margin-bottom: 10px;
+  }
+
+  .titleSearchGames {
+    margin-bottom: 30px;
+    margin-top: 10px;
+    margin-right: 6px;
+    margin-left: 6px;
+    text-align: center;
+  }
 }
