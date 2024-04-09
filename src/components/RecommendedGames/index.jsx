@@ -43,7 +43,9 @@ const RecommendedGames = () => {
             <h2 className={`title2 ${style.titleRatedGames}`}>
               GAMES <span className="titleGradient">RECOMENDADOS</span>
             </h2>
-            <DivGradient />
+            <div className={style.divGradientRecommendedGames}>
+              <DivGradient />
+            </div>
             <div className={style.divGamesCard}>
               {games.map((game) => (
                 <Link to={`/games/gameDetails/${game._id}`} key={game._id}>

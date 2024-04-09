@@ -62,10 +62,10 @@ const AddGame = () => {
   return (
     <>
       <div className="divFlexCenter">
-        <h2 className="title2">
+        <h2 className={`title2 ${style.titleAddGame}`}>
           CADASTRO DE <span className="titleGradient">GAME</span>
         </h2>
-        <form ref={formData} onSubmit={handleForm}>
+        <form className={style.formAddGame} ref={formData} onSubmit={handleForm}>
           <Input
             label="Título do game:"
             type="text"

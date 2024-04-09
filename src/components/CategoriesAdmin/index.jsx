@@ -2,12 +2,10 @@ import { Link } from "react-router-dom";
 import style from "./style.module.css";
 import AddCategory from "../AddCategory";
 import Button from "../Button";
-import { useAuth } from "../../contexts/AuthContext";
 import { useGames } from "../../contexts/GamesContext";
 import Loading from "../Loading";
 
 const CategoriesAdmin = () => {
-  const { user } = useAuth();
   const { categories, loadingCategories } = useGames();
 
   return (

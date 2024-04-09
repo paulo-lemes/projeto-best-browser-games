@@ -80,7 +80,7 @@ const Register = () => {
       <BorderTopGradient />
       <div className="divFlexCenter">
         <h2 className={`title3 ${style.titleRegister}`}>Cadastro</h2>
-        <form ref={formData} onSubmit={handleForm}>
+        <form className={style.formRegister} ref={formData} onSubmit={handleForm}>
           <Input label="Nome:" type="text" name="name" />
           <Input label="E-mail:" type="email" name="email" />
           <Input label="Senha:" type="password" name="password" />

@@ -64,8 +64,8 @@ const HandleCategory = () => {
       ) : (
         <RestrictedRoute page="admin">
           <div className={`divFlexCenter ${style.divHandleCategory}`}>
-            <h1 className="title3">Modifique o nome ou exclua a categoria</h1>
-            <form className="">
+            <h2 className="title3">Modifique o nome ou exclua a categoria</h2>
+            <form>
               <Input
                 label="Nome:"
                 type="text"

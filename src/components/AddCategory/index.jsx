@@ -10,7 +10,7 @@ import { useGames } from "../../contexts/GamesContext";
 const AddCategory = () => {
   const formData = useRef(null);
   const [error, setError] = useState([]);
-  const { showDialog, fetchGamesCategories } = useGames()
+  const { showDialog, fetchGamesCategories } = useGames();
 
   const postCategory = async (info) => {
     try {
@@ -23,8 +23,8 @@ const AddCategory = () => {
         data: JSON.stringify(info),
       });
       console.log(data);
-      showDialog("Categoria cadastrada com sucesso!")
-      fetchGamesCategories()
+      showDialog("Categoria cadastrada com sucesso!");
+      fetchGamesCategories();
     } catch (err) {
       console.log(err.response.data);
       setError(err.response.data);

@@ -20,7 +20,7 @@
   height: 400px;
 }
 
-.cardGameImage>img {
+.cardGameImage > img {
   max-width: 370px;
   max-height: 370px;
 }
@@ -30,7 +30,9 @@
   font-size: 14px;
 }
 
-.clickForDetails, .cardGameDescription, .categoryGameCard {
+.clickForDetails,
+.cardGameDescription,
+.categoryGameCard {
   margin-top: 7px;
 }
 
@@ -66,4 +68,39 @@
 
 .gameScore {
   font-size: 16px;
+}
+
+@media (max-width: 767px) {
+  .card {
+    margin: 15px;
+    width: 280px;
+    height: 560px;
+    max-width: 90%;
+  }
+
+  .cardGameImage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 280px;
+    margin: auto;
+  }
+
+  .cardGameImage > img {
+    max-width: 90%;
+    max-height: 90%;
+  }
+
+  .cardInfos {
+    font-size: 12px;
+  }
+
+  .categoryGameCard {
+    font-size: 15px;
+  }
+
+  .gameScore {
+    font-size: 14px;
+  }
 }

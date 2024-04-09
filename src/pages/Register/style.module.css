@@ -32,7 +32,7 @@ button.registerSend {
     margin-top: 30px;
   }
 
-  form {
+  .formRegister {
     max-width: 90%;
   }
 

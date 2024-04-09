@@ -13,6 +13,7 @@
 
 .divAddCategory {
   margin-top: 200px;
+  max-width: 100%;
 }
 
 .addCategory > form {
@@ -20,12 +21,9 @@
   display: inline;
 }
 
-.inputNewCategory {
-  width: 610px;
-}
-
 .categoryButtons {
   width: 800px;
+  max-width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -42,18 +40,23 @@ button.category {
   margin: 30px 12px 0px 12px;
 }
 
-button.insert {
-  margin-left: 15px;
-}
+@media (max-width: 767px) {
+  .categoryButtons {
+    margin-bottom: 50px;
+  }
 
-.divHandleCategory {
-  margin: 40px 0 80px 0;
-}
+  .categoryButtons > p {
+    margin: 15px 10px;
+    text-align: center;
+  }
 
-.divBtnsHandleCategory {
-  margin: 40px 0;
-}
+  button.category {
+    margin: 15px 6px 0px 6px;
+    width: 140px;
+  }
 
-.btnHandleCategory {
-  margin: 0 10px;
+  .divAddCategory {
+  margin-top: 150px;
+  max-width: 100%;
+}
 }

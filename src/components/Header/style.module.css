@@ -65,18 +65,28 @@ li {
   right: 10px;
   bottom: 10px;
   cursor: pointer;
+  opacity: 0.5;
   z-index: 1;
 }
 
-@media (max-width: 767px) {
+.top:hover {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
   .home,
   .profile,
-  .login {
+  .login,
+  .dropdownContent {
+    display: none;
+  }
+
+  .dropdown:hover .dropdownContent {
     display: none;
   }
 
   body {
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .navbar {
@@ -95,18 +105,32 @@ li {
 
   .logo {
     width: 50px;
-    margin: 20px 20px;
-    margin-right: 70px;
+    margin: 20px 0px;
   }
 
   .userLogin {
-    width: 30px;
+    width: 40px;
+    margin: 0;
   }
 
   .dropdownContent {
     font-size: 10px;
     text-align: left;
     padding: 3px 5px;
+  }
+
+  .dropdown a {
+    width: fit-content;
+  }
+
+  .navbar a {
+    width: fit-content;
+  }
+
+  .dropdown {
+    position: relative;
+    display: block;
+    width: fit-content;
   }
 
   .logout {
