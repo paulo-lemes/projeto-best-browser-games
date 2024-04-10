@@ -11,10 +11,15 @@ import SearchGames from "../../components/SearchGames";
 import GamesCards from "../../components/GamesCards";
 import FeaturedGames from "../../components/FeaturedGames";
 import { useGames } from "../../contexts/GamesContext";
+import { useEffect } from "react";
 
 const Home = () => {
   const { user } = useAuth();
-  const { searchText, searchCategory } = useGames();
+  const { searchText, searchCategory, handleSearchCategory } = useGames();
+
+  useEffect(() => {
+    handleSearchCategory("");
+  }, []);
 
   return (
     <>
@@ -35,7 +40,6 @@ const Home = () => {
           </div>
           <img
             src={Card1}
-            className=""
             alt="Imagem cartunesca de homem jogando com logotipo"
           />
         </div>
@@ -45,7 +49,6 @@ const Home = () => {
           <div className={style.home2}>
             <img
               src={Card2}
-              className=""
               alt="Imagem cartunesca de mulher jogando com logo"
             />
             <div className={style.chamada2}>

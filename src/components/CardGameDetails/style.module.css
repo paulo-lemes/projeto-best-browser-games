@@ -104,3 +104,135 @@
 .btnsAskLogin {
   margin: 20px;
 }
+
+@media (max-width: 767px) {
+  .divCardGameDetails {
+    border: 2px solid var(--USE, #89347c);
+    border-right: none;
+    border-top: none;
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+  }
+
+  .halfBorderTop {
+    border-bottom: 2px solid var(--USE, #89347c);
+    margin: 15px 20px;
+    margin-bottom: 0;
+    width: 47%;
+  }
+
+  .gameInfos {
+    order: 1;
+    width: 100%;
+  }
+
+  .gameImg {
+    order: 0;
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .linkGame,
+  .gameScore {
+    font-size: 16px;
+  }
+
+  .ratingDescription {
+    width: 100%;
+    height: 120;
+    padding: 10px;
+    resize: none;
+    margin-top: 10px;
+  }
+
+  .gameScoreImg {
+    width: 40px;
+    height: 60px;
+    margin-right: -10px;
+  }
+
+  .gameDetailsTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .divGameScore {
+    display: flex;
+    align-items: center;
+  }
+
+  .gameCategoryName {
+    margin: 10px 0;
+  }
+
+  .gameDescription {
+    margin-bottom: 30px;
+  }
+
+  .starsRating {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .rateGame {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+  }
+
+  .rateGame label {
+    margin: 0;
+  }
+
+  .ratingStar {
+    margin-left: 10px;
+    width: 30px;
+  }
+
+  .maxRating {
+    margin-top: 7px;
+    margin-left: 5px;
+  }
+
+  .btnSendRating {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 45px;
+  }
+
+  .divBtnPrevious {
+    margin: 40px 0;
+  }
+
+  .rateScore {
+    width: 75px;
+    height: 40px;
+    padding: 0;
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .divAskLogin {
+    margin-top: 60px;
+  }
+
+  .divAskLogin h4 {
+    text-align: center;
+  }
+
+  .divAskLogin button {
+    width: 110px;
+    height: 45px;
+  }
+
+  .btnsAskLogin {
+    margin: 10px 5px;
+  }
+}

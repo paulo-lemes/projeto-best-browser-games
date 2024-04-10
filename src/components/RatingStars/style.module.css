@@ -19,3 +19,11 @@ input[type="radio"] {
 .starNull {
   color: grey;
 }
+
+@media (max-width: 767px) {
+  .star {
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin: 1px;
+  }
+}
