@@ -68,21 +68,24 @@ const FeaturedGames = () => {
           {featuredGames.length > 0 ? (
             <>
               <div className={style.divCarousel}>
-                <button onClick={handleScrollLeft}>
+                <button type="button" onClick={handleScrollLeft}>
                   <CaretLeft size={32} color="#fcfcfc" weight="fill" />
                 </button>
                 <div className={style.carousel}>
                   <div className={style.inner} ref={carousel}>
                     {featuredGames.map((game) => (
                       <div className={style.item} key={game._id}>
-                        <Link to={`/games/gameDetails/${game._id}`}>
+                        <Link
+                          to={`/games/gameDetails/${game._id}`}
+                          onClick={() => window.scroll(0, 0)}
+                        >
                           <CardGame game={game} />
                         </Link>
                       </div>
                     ))}
                   </div>
                 </div>
-                <button onClick={handleScrollRight}>
+                <button type="button" onClick={handleScrollRight}>
                   <CaretRight size={32} color="#fcfcfc" weight="fill" />
                 </button>
               </div>

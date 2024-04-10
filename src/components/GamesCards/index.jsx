@@ -14,7 +14,11 @@ const GamesCards = () => {
         <div className="divGamesCard">
           {games.length > 0 ? (
             games.map((game) => (
-              <Link to={`/games/gameDetails/${game._id}`} key={game._id}>
+              <Link
+                to={`/games/gameDetails/${game._id}`}
+                key={game._id}
+                onClick={() => window.scroll(0, 0)}
+              >
                 <CardGame game={game} />
               </Link>
             ))
