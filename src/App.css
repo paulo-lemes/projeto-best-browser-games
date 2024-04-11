@@ -149,6 +149,7 @@ body {
 
 .divAccessAdmin {
   margin-top: 50px;
+  text-align: center;
 }
 
 footer {
@@ -213,6 +214,5 @@ footer {
 
   .divAccessAdmin {
     margin-top: 20px;
-    text-align: center;
   }
 }

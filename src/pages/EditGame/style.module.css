@@ -26,11 +26,12 @@
   }
 
   .divEditGame {
-      margin-top: 20px;
+    margin-top: 20px;
   }
 
   .divEditGame h2 {
-    margin-bottom: 10px;
+    margin: 0 5px 10px;
+    text-align: center;
   }
 
   .inputDescription {
