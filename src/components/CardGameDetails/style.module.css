@@ -105,7 +105,7 @@
   margin: 20px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1439px) {
   .divCardGameDetails {
     border: 2px solid var(--USE, #89347c);
     border-right: none;
