@@ -27,8 +27,12 @@ Este projeto tem como objetivo desenvolver uma aplicação web para o BestBrowse
 - recomendações de jogos;
 
 ## Curso Front-End - Ada Tech - Programa Vem Ser Tech iFood
-## Módulo - React I
+### Módulo - React I
 
 ## Documentação da API utilizada:
 
 https://api-best-browser-games.vercel.app/docs/
+
+## Deploy:
+
+https://bestbrowsergames.vercel.app/
