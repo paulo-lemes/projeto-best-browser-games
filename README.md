@@ -37,7 +37,7 @@ https://api-best-browser-games.vercel.app/docs/
 
 ## Deploy:
 
-https://bestbrowsergames.vercel.app/
+[https://bestbrowsergame.netlify.app/](https://bestbrowsergame.netlify.app/)
 
 
 <div id="header" align="center">
